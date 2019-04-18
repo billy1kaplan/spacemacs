@@ -10,6 +10,38 @@
 ;;; License: GPLv3
 
 
+;; backend
+(defun spacemacs//ruby-setup-backend ()
+  "Conditionally configure Ruby backend"
+  (pcase ruby-backend
+    (`lsp (spacemacs//ruby-setup-lsp))))
+
+(defun spacemacs//ruby-setup-company ()
+  "Configure backend company"
+  (pcase ruby-backend
+    (`lsp (spacemacs//ruby-setup-lsp-company))))
+
+
+;; lsp
+(defun spacemacs//ruby-setup-lsp ()
+  "Setup Ruby lsp."
+  (if (configuration-layer/layer-used-p 'lsp)
+      (lsp)
+    (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile.")))
+
+(defun spacemacs//ruby-setup-lsp-company ()
+  "Setup lsp auto-completion"
+  (if (configuration-layer/layer-used-p 'lsp)
+      (progn
+        (spacemacs|add-company-backends
+         :backends company-lsp
+         :modes enh-ruby-mode ruby-mode
+         :append-hooks nil
+         :call-hooks t))
+    (company-mode))
+  (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile."))
+
+
 ;; rbenv
 
 (defun spacemacs//enable-rbenv ()

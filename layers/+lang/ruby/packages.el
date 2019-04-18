@@ -53,7 +53,13 @@
               "bo" 'bundle-open))))
 
 (defun ruby/post-init-company ()
-  (spacemacs//ruby-setup-company))
+  (add-hook 'ruby-mode-local-vars-hook #'spacemacs//ruby-setup-company)
+  (spacemacs|add-company-backends
+   :backends (company-files company-capf)
+   :modes ruby-mode
+   :variables
+   company-minimum-prefix-length 0
+   company-idle-delay 0.5))
 
 (defun ruby/init-chruby ()
   (use-package chruby
