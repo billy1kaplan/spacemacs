@@ -21,18 +21,8 @@
   (pcase ruby-backend
     (`lsp (spacemacs//ruby-setup-lsp-company))))
 
-(defun spacemacs//python-setup-lsp-company ()
-  "Setup lsp auto-completion."
-  (if (configuration-layer/layer-used-p 'lsp)
-      (progn
-        (spacemacs|add-company-backends
-         :backends company-lsp
-         :modes enh-ruby-mode ruby-mode
-         :append-hooks nil
-         :call-hooks t)
-        (company-mode))
-    (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile.")))
-
+
+;; lsp
 (defun spacemacs//ruby-setup-lsp ()
   "Setup Ruby lsp."
   (if (configuration-layer/layer-used-p 'lsp)
@@ -45,13 +35,11 @@
       (progn
         (spacemacs|add-company-backends
          :backends company-lsp
-         :modes ruby-mode
+         :modes enh-ruby-mode ruby-mode
          :append-hooks nil
          :call-hooks t))
     (company-mode))
   (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile."))
-
-;; lsp
 
 
 ;; rbenv
