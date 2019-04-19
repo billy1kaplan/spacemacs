@@ -14,15 +14,18 @@
 (defun spacemacs//ruby-setup-backend ()
   "Conditionally configure Ruby backend"
   (pcase ruby-backend
-    (`lsp (spacemacs//ruby-setup-lsp))))
+    (`lsp (spacemacs//ruby-setup-lsp))
+    (`robe (spacemacs//ruby-setup-robe))))
 
 (defun spacemacs//ruby-setup-company ()
   "Configure backend company"
   (pcase ruby-backend
-    (`lsp (spacemacs//ruby-setup-lsp-company))))
+    (`lsp (spacemacs//ruby-setup-lsp-company))
+    (`robe (spacemacs//ruby-setup-robe-company))))
 
 
 ;; lsp
+
 (defun spacemacs//ruby-setup-lsp ()
   "Setup Ruby lsp."
   (if (configuration-layer/layer-used-p 'lsp)
@@ -40,6 +43,21 @@
          :call-hooks t)
         (company-mode))
   (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile.")))
+
+
+;; robe
+
+(defun spacemacs//ruby-setup-robe ()
+  (robe-mode))
+
+(defun spacemacs//ruby-setup-robe-company ()
+  "Setup robe auto-completion."
+  (spacemacs|add-company-backends
+    :backends company-robe
+    :modes enh-ruby-mode ruby-mode
+    :append-hooks nil
+    :call-hooks t)
+  (company-mode))
 
 
 ;; rbenv

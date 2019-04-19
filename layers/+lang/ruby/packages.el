@@ -247,7 +247,8 @@
       (spacemacs/declare-prefix-for-mode 'ruby-mode "mr" "refactor/RuboCop/robe")
       (spacemacs/declare-prefix-for-mode 'ruby-mode "mt" "test")
       (spacemacs/declare-prefix-for-mode 'ruby-mode "mT" "toggle")
-      (spacemacs/add-to-hook 'ruby-mode-hook '(spacemacs//ruby-setup-backend))
+      (spacemacs/add-to-hooks #'spacemacs//ruby-setup-backend
+                              '(ruby-mode-hook enh-ruby-mode-hook))
       (spacemacs/add-to-hooks
        'spacemacs/ruby-maybe-highlight-debugger-keywords
        '(ruby-mode-local-vars-hook enh-ruby-mode-local-vars-hook)))
