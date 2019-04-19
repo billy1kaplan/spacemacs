@@ -37,9 +37,9 @@
          :backends company-lsp
          :modes enh-ruby-mode ruby-mode
          :append-hooks nil
-         :call-hooks t))
-    (company-mode))
-  (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile."))
+         :call-hooks t)
+        (company-mode))
+  (message "`lsp' layer is not installed, please add `lsp' layer to your dotfile.")))
 
 
 ;; rbenv
